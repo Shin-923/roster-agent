@@ -1,5 +1,7 @@
 # 명단 검수 에이전트
 
+[![test](https://github.com/Shin-923/roster-agent/actions/workflows/test.yml/badge.svg)](https://github.com/Shin-923/roster-agent/actions/workflows/test.yml)
+
 엑셀 · CSV 명단을 올리면 LLM 이 검증 도구를 골라 쓰며 문제를 찾고 수정안을 정리합니다. **DB 에 쓰는 일은 사람이 승인해야만** 실행됩니다.
 
 행사 참가자 명단은 이메일 오타, `+82` 번호, 중복 행이 섞여 들어옵니다. 사람이 하나씩 고치면 느리고, AI 에게 통째로 맡기면 무엇을 바꿨는지 알 수 없습니다. 이 프로젝트는 판단은 모델에게 맡기고, 저장은 사람과 서버가 막는 구조를 실험합니다.
@@ -64,6 +66,8 @@ MCP 클라이언트 설정 예:
 npm test          # 19개
 npm run typecheck
 ```
+
+푸시할 때마다 GitHub Actions 가 같은 두 명령을 돌립니다(`.github/workflows/test.yml`, Node 22 · Ubuntu).
 
 `tests/agent.test.ts` 는 실제 API 대신 정해진 응답을 돌려주는 가짜 모델을 씁니다. 확인하는 것:
 
