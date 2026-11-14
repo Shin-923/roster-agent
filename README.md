@@ -88,6 +88,25 @@ npm run typecheck
 | 같은 턴에 쓰기 도구가 목록 중간에 오면 API 오류 | 쓰기 도구에서 바로 멈춰 뒤쪽 `tool_use` 에 결과가 없었음 | 읽기 도구를 모두 실행한 뒤 쓰기 하나만 대기, 나머지 쓰기는 오류 결과로 반환 |
 | 개발 서버에서 테스트 0개 | Vite 루트가 `web` 이라 Vitest 가 `tests/` 를 못 찾음 | `vitest.config.ts` 분리 |
 
+## Claude Code 로 만든 방법
+
+코드는 Claude Code(CLI)로 작성했습니다. 커밋에 `Co-Authored-By: Claude` 로 표시되어 있습니다.
+
+| 단계 | 내가 한 것 | Claude Code 에 맡긴 것 |
+|---|---|---|
+| 설계 | 「모델은 판단만, 저장은 사람 승인 + 서버 재검사」 구조와 도구 7개의 범위를 정함 | 구조 초안, 라이브러리 비교 |
+| 구현 | 규칙 파일로 작업 규칙 전달(아래) · diff 검토 | 서버 · 화면 · 테스트 코드 작성 |
+| 검증 | 테스트 결과 · 재생 모드 화면 확인, 버그 재현 | 테스트 실행, 실패 원인 분석 |
+
+규칙 파일에 둔 규칙:
+
+- 실행해서 확인하지 않은 작업은 완료라고 쓰지 않는다.
+- 테스트를 통과시키려고 테스트를 고치지 않는다.
+- 새 라이브러리 · 디렉터리는 묻고 추가한다.
+- 화면을 바꾸면 브라우저에서 직접 조작하고 콘솔 오류를 확인한다.
+
+「개발하며 고친 것」 표의 세 건이 이 과정에서 나온 문제입니다.
+
 ## 기술
 
 TypeScript · Node.js 22 · Fastify 5 · React 19 · Vite · Anthropic SDK (Tool Calling) · MCP SDK · Drizzle ORM · SQLite(better-sqlite3) · exceljs · zod · Vitest
